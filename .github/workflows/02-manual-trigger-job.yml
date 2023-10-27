@@ -9,21 +9,20 @@ on:
 
 
 jobs:
-  if_merged:
+  train:
     if: github.event.pull_request.merged == true
-    train:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Check out repo
-        uses: actions/checkout@main
-      - name: Install az ml extension
-        run: az extension add -n ml -y
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-      - name: Trigger Azure Machine Learning job
-        run: |
-          az ml job create --file src/job.yml --web --resource-group 06aug91-rg --workspace-name amit-ml
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Trigger Azure Machine Learning job
+      run: |
+        az ml job create --file src/job.yml --web --resource-group 06aug91-rg --workspace-name amit-ml
 
 
