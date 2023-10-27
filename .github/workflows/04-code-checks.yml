@@ -7,7 +7,7 @@ on:
 
 jobs:
   job1:
-    name: linting
+    name: unit-test
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
